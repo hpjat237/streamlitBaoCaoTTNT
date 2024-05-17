@@ -239,7 +239,7 @@ if st.button('Run'):
         return lst_doan_thang, red_circle
 
     def animate(i):
-        red_circle.set_data(lst_vi_tri_x[i], lst_vi_tri_y[i])
+        red_circle.set_data([lst_vi_tri_x[i]], [lst_vi_tri_y[i]])
         return lst_doan_thang, red_circle 
 
     anim = FuncAnimation(fig, animate, frames=FRAME, interval=100, init_func=init, repeat=False)
