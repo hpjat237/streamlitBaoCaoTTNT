@@ -229,14 +229,6 @@ if st.button('Run'):
             y = y1 + (y2-y1)*t
             lst_vi_tri_x.append(x)
             lst_vi_tri_y.append(y)
-    for i in range(0, L-1):
-        x1 = lst_path_location_x[i]
-        y1 = lst_path_location_y[i]
-        x2 = lst_path_location_x[i+1]
-        y2 = lst_path_location_y[i+1]
-
-        dx = x2 - x1
-        dy = y2 - y1
 
     red_circle, = ax.plot([],[],"ro",markersize = 10)
 
