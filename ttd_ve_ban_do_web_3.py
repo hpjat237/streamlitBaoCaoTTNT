@@ -89,7 +89,7 @@ if "flag_anim" not in st.session_state:
         print('Đã vẽ bản đồ')
         st.pyplot(st.session_state['fig'])
 else:
-    components.html(st.session_state["anim"].to_jshtml(), height=900)
+    components.html(st.session_state["anim"].to_jshtml(), height=600)
 
 lst_city = []
 for city in city_name:
