@@ -175,7 +175,7 @@ if st.button('Run'):
 
     fig, ax = plt.subplots()
     ax.axis([xmin, xmax, ymin, ymax])
-    ax.axis('off')
+    dem = 0
     lst_doan_thang = []
     
     for key in graph_dict:
@@ -188,6 +188,7 @@ if st.button('Run'):
             y1 = map_locations[neighbor][1]
             doan_thang, = ax.plot([x0, x1], [y0, y1], 'lightgray')
             lst_doan_thang.append(doan_thang)
+            dem = dem + 1
 
         path_tim_thay, = ax.plot(lst_path_location_x, lst_path_location_y, 'gray')
         lst_doan_thang.append(path_tim_thay)
@@ -203,6 +204,8 @@ if st.button('Run'):
         dy = city_name[key][1]
         ten = ax.text(x0+dx,y0-dy,key)
         lst_doan_thang.append(ten)
+
+    print('Dem: ', dem)
 
     N = 11
     d = 100
@@ -241,7 +244,6 @@ if st.button('Run'):
 
     def init():
         ax.axis([xmin, xmax, ymin, ymax])
-        ax.axis('off')
         return lst_doan_thang, red_circle
 
     def animate(i):
