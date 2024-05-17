@@ -89,7 +89,7 @@ if "flag_anim" not in st.session_state:
         print('Đã vẽ bản đồ')
         st.pyplot(st.session_state['fig'])
 else:
-    components.html(st.session_state["anim"].to_jshtml(), height=600)
+    components.html(st.session_state["anim"].to_jshtml(), height=900)
 
 lst_city = []
 for city in city_name:
@@ -175,6 +175,7 @@ if st.button('Run'):
 
     fig, ax = plt.subplots()
     ax.axis([xmin, xmax, ymin, ymax])
+    ax.axis('off')  # Ẩn trục tọa độ
     dem = 0
     lst_doan_thang = []
     
@@ -236,6 +237,7 @@ if st.button('Run'):
 
     def init():
         ax.axis([xmin, xmax, ymin, ymax])
+        ax.axis('off')  # Ẩn trục tọa độ
         return lst_doan_thang, red_circle
 
     def animate(i):
