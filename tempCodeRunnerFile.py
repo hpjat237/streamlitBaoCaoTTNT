@@ -1,3 +1,7 @@
-def animate(i):
-        red_circle.set_data(lst_vi_tri_x[i], lst_vi_tri_y[i])
-        return lst_doan_thang, red_circle 
+
+def ve_ban_do():
+    fig, ax = plt.subplots()
+    ax.axis([xmin, xmax, ymin, ymax])
+    ax.axis('off')  # Ẩn trục tọa độ
+    ve_doan_thang(ax)
+    ve_diem(ax)

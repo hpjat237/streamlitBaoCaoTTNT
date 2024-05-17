@@ -3,6 +3,7 @@ import streamlit.components.v1 as components
 
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+import matplotlib.image as mpimg
 
 import numpy as np
 from search import *
@@ -71,7 +72,7 @@ def ve_doan_thang(ax):
 def ve_ban_do():
     fig, ax = plt.subplots()
     ax.axis([xmin, xmax, ymin, ymax])
-    ax.imshow(Image.open("thuduc_map.png"), extent=[xmin, xmax, ymin, ymax], aspect='auto')
+    ax.axis('off')  # Ẩn trục tọa độ
     ve_doan_thang(ax)
     ve_diem(ax)
     return fig
@@ -129,12 +130,18 @@ if st.button('Direction'):
 
     fig, ax = plt.subplots()
     ax.axis([xmin, xmax, ymin, ymax])
+    ax.axis('off')
     ve_doan_thang(ax)
     path_tim_thay, = ax.plot(lst_path_location_x, lst_path_location_y, 'gray', linewidth=3)
     ve_diem(ax)
     print('Đã gán fig có hướng dẫn')
     st.session_state['fig'] = fig
     st.rerun()
+
+def ve_hinh_tam_giac(ax, x, y):
+    triangle = patches.Polygon(np.column_stack([x, y]), closed=True, edgecolor='r', facecolor='r', alpha=0.5)  # Vẽ tam giác màu đỏ
+    ax.add_patch(triangle)
+    return triangle
 
 if st.button('Run'):
     start_city = st.session_state['start_city']
@@ -168,7 +175,7 @@ if st.button('Run'):
 
     fig, ax = plt.subplots()
     ax.axis([xmin, xmax, ymin, ymax])
-    dem = 0
+    ax.axis('off')
     lst_doan_thang = []
     
     for key in graph_dict:
@@ -181,7 +188,6 @@ if st.button('Run'):
             y1 = map_locations[neighbor][1]
             doan_thang, = ax.plot([x0, x1], [y0, y1], 'lightgray')
             lst_doan_thang.append(doan_thang)
-            dem = dem + 1
 
         path_tim_thay, = ax.plot(lst_path_location_x, lst_path_location_y, 'gray')
         lst_doan_thang.append(path_tim_thay)
@@ -197,8 +203,6 @@ if st.button('Run'):
         dy = city_name[key][1]
         ten = ax.text(x0+dx,y0-dy,key)
         lst_doan_thang.append(ten)
-
-    print('Dem: ', dem)
 
     N = 11
     d = 100
@@ -237,6 +241,7 @@ if st.button('Run'):
 
     def init():
         ax.axis([xmin, xmax, ymin, ymax])
+        ax.axis('off')
         return lst_doan_thang, red_circle
 
     def animate(i):
